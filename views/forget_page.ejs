@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Forget Account</title>
+    <link rel="shortcut icon" href="media/root.ico" type="image/x-icon">  
+
+    <link rel="shortcut icon" href="media/root.ico" type="image/x-icon">  
+
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        <style>
+               body *{
+        font: 1em sans-serif;
+    }
+        input{
+        width: 100%;
+        height: 35px;
+        border-radius: 5px;
+        border: 1px solid slateblue;
+        outline-color: slateblue;
+
+        
+    }
+
+      #iconPassword{
+        width: 20px;
+      }
+    
+    form{
+            width: 100%;
+            /* background-color: ; */
+            position: relative;
+             margin: auto;
+            top: 30px;
+            display: none;
+        }
+
+        @media only screen and (min-width: 768px) {
+            form {
+                width: 50%;
+            }
+        }
+        </style>
+    </head>
+
+
+    <body onload="load()" class=" container">
+
+      <% if(typeof enabled!=typeof alifn && enabled=="username") {%>
+
+        <legend style="background-color: slateblue;" class="shadow alert text-center text-light">Forget Account</legend>
+
+
+        <% if(typeof msg!=  typeof alifn && msg.length !=0) {%>
+            <div class=" alert <%=alertType%>  container w-50"><%= msg %></div>
+            <% } else {%>
+                <%= null %> 
+                <% } %> 
+
+        <form id="form" class="was-validated alert shadow" action="/find.forget.account" method="post">
+
+            <div>
+                <a class=" float-end" href="/login.page">Sing in</a>
+            </div>
+ 
+            <div>
+                <input type="email" name="username" placeholder="username" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" required>
+            </div>
+<p></p>
+
+          
+             <div>
+
+                <button style="background-color: slateblue;" class="w-100 text-light btn">Continue</button>
+             </div>
+           
+            
+
+
+        </form>
+
+        
+        <% } else {%>
+            <%= null%> 
+            <% } %> 
+
+
+            
+      <% if(typeof enabled!=typeof alifn && enabled=="verify") {%>
+
+        <legend style="background-color: slateblue;" class="shadow alert text-center text-light">Verification Code</legend>
+
+        <% if(typeof msg!=  typeof alifn && msg.length !=0) {%>
+            <div class=" alert <%=alertType%> container w-50"><%= msg %></div>
+            <% } else {%>
+                <%= null %> 
+                <% } %> 
+
+        <form class="was-validated alert shadow " action="/verify.forget.account" method="post">
+ 
+                <div><input name="userCode" type="text" required pattern="^[0-9]*$" placeholder="enter code" >
+                <div class="invalid-feedback">code should be 5 or 6 digit</div>
+                </div>
+<p></p>
+
+          
+             <div>
+
+                <button style="background-color: slateblue;" class="w-100 text-light btn">Verify</button>
+             </div>
+           
+            
+
+
+        </form>
+
+        
+        <% } else {%>
+            <%= null%> 
+            <% } %> 
+
+
+            
+      <% if(typeof enabled!=typeof alifn && enabled=="password") {%>
+
+        <legend style="background-color: slateblue;" class="shadow alert text-center text-light">New Password</legend>
+
+        <% if(typeof msg!=  typeof alifn && msg.length !=0) {%>
+            <div class=" alert <%=alertType%>  container w-50"><%= msg %></div>
+            <% } else {%>
+                <%= null %> 
+                <% } %> 
+
+        <form class="was-validated alert shadow" action="/reset.forget.password" method="post">
+            <div>
+                <a class=" float-end" href="/login.page">Sing in</a>
+
+            </div>
+ 
+            
+            <input id="password" type="password" name="password" placeholder="password" pattern="^[a-zA-Z0-9!@#$%&*]*$" minlength="6" maxlength="20"  required> 
+
+            <div>
+                
+                <input type="checkbox" name="iconPassword" id="iconPassword">
+            </div>
+          <div>
+            <label class="text-muted" for="iconPassword">Show Password</label>
+          </div>
+
+            <div class="invalid-feedback">
+                Required: <br>
+                Minimun: 6 Letter <br>
+                Maximun: 20 Letter
+            </div>
+            <div
+          
+        </div>
+<p></p>
+
+          
+             <div>
+
+                <button style="background-color: slateblue;" class="w-100 text-light btn">Reset</button>
+             </div>
+           
+            
+
+
+        </form>
+
+        
+        <% } else {%>
+            <%= null%> 
+            <% } %> 
+
+
+
+    </body>
+
+    <script>
+
+    function load(){
+        $("form").fadeIn("slow")
+    }
+        
+    $("#iconPassword").click(()=>{
+
+            
+if($("#password").attr("type")=="password"){
+
+$("#password").attr("type", "text")
+
+
+}
+
+else if($("#password").attr("type")=="text"){
+
+$("#password").attr("type", "password")
+
+
+}
+
+})
+
+    </script>
+
+</html>

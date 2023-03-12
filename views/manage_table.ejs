@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Tables</title>
+    <link rel="shortcut icon" href="media/root.ico" type="image/x-icon">  
+
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script></head>
+
+</head>
+<body class=" container">
+    <legend style="background-color: #7f00ff;  font-family:'Times New Roman', Times, serif;
+    " class=" alert text-center text-light">Manage Table </legend>
+   <a class=" nav-link" href="/admin.dashboard">Dashboard </a>
+
+   <div style="display: none;" id="alert" class=" alert alert-success shadow text-center fw-bold w-100 m-auto border-1"></div>
+
+      
+ 
+<form action="/search.table" method="post">
+    <div class=" btn-group float-end">
+        <input id="myInput" style=" outline: none;" name="tableName" type="search" pattern="^[a-zA-Z0-9_\s]*$" placeholder="Search" required> 
+        <button class="page-link btn"><i class=" fa fa-search"></i></button>
+      </div>
+    
+</form>
+
+<div style="width: max-content;" class="p-2 fw-bold font-monospace rounded shadow bg-dark text-light">Total= <%=tableCount-2%></div>
+
+   <% if(table_name.length>0) {%> 
+    
+    <table class=" table ">
+        <thead class=" table-info">
+            <th>Name</th>
+            <th>Access</th>
+            <th>Action</th>
+        </thead>
+
+    
+
+      <tbody id="myTable" style="display: none;">
+
+        <% for(let i=0; i<table_name.length; i++){ %>
+            <tr >
+                <td class=" page-item"> <a class=" page-link"  href="/manage.column?tableName=<%= table_name[i].TABLE_NAME%>"> <%= table_name[i].TABLE_NAME%></a></td>
+
+                
+
+                <td> 
+                    <% if(table_name[i].TABLE_NAME.search(/_deo_/)>-1) {%>
+                    <button  id="<%=table_name[i].TABLE_NAME%>" data-id="<%= table_name[i].TABLE_NAME%>&<%= table_name[i].TABLE_NAME%>_deo_"  class="access bg-secondary  btn disabled">DEO</button>
+
+                        <% } else {%>
+                    <button  id="<%=table_name[i].TABLE_NAME%>" data-id="<%= table_name[i].TABLE_NAME%>&<%= table_name[i].TABLE_NAME%>_deo_"  class="access  btn btn-outline-primary">DEO</button>
+
+                            <% } %>   
+
+                            <% if(table_name[i].TABLE_NAME.search(/_ueo_/)>-1) {%>
+                                <button  id="<%=table_name[i].TABLE_NAME%>" data-id="<%= table_name[i].TABLE_NAME%>&<%= table_name[i].TABLE_NAME%>_ueo_"  class="access access bg-secondary  btn disabled">UEO</button>
+            
+                                    <% } else {%>
+                                <button  id="<%=table_name[i].TABLE_NAME%>" data-id="<%= table_name[i].TABLE_NAME%>&<%= table_name[i].TABLE_NAME%>_ueo_"  class="access  btn btn-outline-primary">UEO</button>
+            
+                                        <% } %>   
+
+                                        <% if(table_name[i].TABLE_NAME.search(/_hm_/)>-1) {%>
+                                            <button  id="<%=table_name[i].TABLE_NAME%>" data-id="<%= table_name[i].TABLE_NAME%>&<%= table_name[i].TABLE_NAME%>_hm_"  class="access access bg-secondary  btn disabled">HM</button>
+                        
+                                                <% } else {%>
+                                            <button  id="<%=table_name[i].TABLE_NAME%>" data-id="<%= table_name[i].TABLE_NAME%>&<%= table_name[i].TABLE_NAME%>_hm_"  class="access  btn btn-outline-primary">HM</button>
+                        
+                                                    <% } %>  
+                                                    
+
+
+                </td>
+                <td><a id="<%=table_name[i].TABLE_NAME%>"  class="btn btn-info" href="/update.table.form?table_name=<%= table_name[i].TABLE_NAME%>"><i class=" fa fa-edit"></i></a> <button id="<%=table_name[i].TABLE_NAME%>"  class="action_del btn btn-danger" data-id="<%= table_name[i].TABLE_NAME%>"><i class="fa fa-trash"></i></button>  </td>
+            </tr>
+            <% } %>  
+
+
+      </tbody>
+        </table>
+        <center>
+            <div id="wait" class="alert shadow w-25 rounded-pill">
+             <div class=" spinner-grow bg-danger"></div>
+             <div class=" spinner-grow bg-warning"></div>
+             <div class=" spinner-grow bg-primary"></div>
+            </div>
+           </center>
+    
+        <ul style="left: 25%;" class="pagination position-relative" >
+
+            <% if(active!=undefined) {%>
+                <% 
+                
+                var prev= parseInt(active) 
+                
+                if(prev<2){
+                    var prev=2
+                    var prevStatus= "disabled"
+                }
+
+                %> 
+                <% } else {%>
+                    <% var prev= 2%> 
+                    <% } %> 
+    
+
+
+            <li class="  <%=prevStatus %>  page-item"><a class="page-link" href="/manage.table?offset=<%=prev-1%> ">Previous</a></li>
+     
+         <% for(let i=1; i<= Math.floor(tableCount/10)+1; i++) {%>
+
+            <li class="page-item <%= [i]==active ? 'active' : null %> "><a class=" page-link" href="/manage.table?offset=<%=[i]%>"><%=[i]%></a></li>
+            
+            <% } %> 
+            
+            <% if(active!=undefined) {%>
+                <% 
+                
+                var next= parseInt(active) 
+                
+                if(next >=Math.floor(tableCount/10)+1){
+                    var next=0
+                    var nextStatus= "disabled"
+                }
+
+                %> 
+                <% } else {%>
+                    <% var next= 1%> 
+                    <% } %> 
+    
+
+                <li class="page-item  <%=nextStatus %> "><a id="next" class="page-link" href="/manage.table?offset=<%=next+1%> ">Next</a></li>
+
+            
+          </ul>
+
+    <% } else {%> 
+        <div class=" alert alert-info container w-50">No Table Found...</div>
+
+        <% } %> 
+
+     
+ 
+       
+
+    <script>
+
+// 
+
+$(document).on("click", ".access", function(){
+
+        let arr= $(this).attr("data-id").split("&")
+         let old_table= arr[0]
+         let new_table= arr[1]
+       if(confirm("Give Access Now!")==true){
+            $.ajax({
+                type: "POST",
+                url: "/todo.table.type",
+                dataType: "JSON",
+                data: {old_table, new_table},
+                success: function(msg){
+
+
+                    $("#alert").fadeIn("slow", ()=>{
+                $("#alert").text(`${msg.msg}`)
+            })
+
+                }
+            })
+        
+            setTimeout(()=>{
+            window.location.reload()
+           }, 3000)
+       
+            
+       }
+       })
+
+
+
+
+$(document).on("click", ".action_del", function(){
+        let table_name= $(this).attr("data-id")
+
+       if(confirm("are you want to delete!")==true){
+
+            $.ajax({
+                type: "POST",
+                url: "/del.table",
+                dataType: "JSON",
+                data: {table_name},
+                success: function(msg){
+
+
+                $("#alert").fadeIn("slow", ()=>{
+                $("#alert").text(`${msg.msg}`)
+
+            })
+
+        }
+            })
+
+           setTimeout(()=>{
+            window.location.reload()
+           }, 2000)
+       }
+       })
+
+ 
+
+setTimeout(()=>{
+
+$("#wait").fadeOut("slow", ()=>{
+
+    $("tbody").fadeIn("slow")
+})
+
+
+}, 1000)
+
+
+
+ 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Table Form</title>
+    <link rel="shortcut icon" href="media/root.ico" type="image/x-icon">  
+
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script></head>
+
+</head>
+<body class=" container">
+    <legend style="background-color: #7f00ff;  font-family:'Times New Roman', Times, serif;
+    " class=" alert text-center text-light">Update Table</legend>
+    <button class="btn  nav-link" onclick="back()">Back</button>
+
+    <div style="display: none;" id="alert" class=" alert alert-success shadow text-center fw-bold w-100 m-auto border-1"></div>
+
+    
+
+    <div class=" btn-group">
+        <input id="new_table" pattern="^[a-zA-Z0-9_]*$" class="form-control form-control-sm" type="text" name="table_name" value="<%=table_name%>" required>
+ 
+        <input style="display: none;" id="old_table"   class=" form-control form-control-sm" type="text" name="old_table" value="<%=table_name%>" >
+    <button class="action_update btn bg-secondary text-light">Save </button>
+    </div>
+</body>
+<script>
+    $(document).on("click", ".action_update", function(){
+        let new_table= $("#new_table").val()
+        let old_table= $("#old_table").val()
+       $.ajax({
+        type: "POST",
+        url: "/update.table",
+        dataType: "JSON",
+        data: {old_table, new_table},
+        success: function(msg){
+
+            $("#alert").fadeIn("slow", ()=>{
+                $("#alert").text(`${msg.msg}`)
+            })
+        
+        }
+
+       })
+
+
+
+    })
+
+    function back(){
+        window.history.back()
+    }
+
+</script>
+</html>

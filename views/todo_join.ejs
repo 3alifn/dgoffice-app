@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Verify</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+<style>
+           body *{
+        font: 1em sans-serif;
+    }
+        
+        input{
+        width: 100%;
+        height: 35px;
+        border-radius: 5px;
+        border: 1px solid slateblue;
+        outline-color: slateblue;
+
+        
+    }
+
+      
+    
+    form{
+            width: 100%;
+            /* background-color: ; */
+            position: relative;
+             margin: auto;
+            top: 30px;
+            display: none;
+        }
+
+        @media only screen and (min-width: 768px) {
+            form {
+                width: 50%;
+            }
+        }
+    </style>
+</head>
+<body onload="load()" class=" container">
+
+    <legend style="background-color: slateblue;" class="shadow alert text-center text-light">Verify Account</legend>
+
+       <% if(typeof msg!=  typeof alifn && msg.length !=0) {%>
+        <div class=" alert <%=alertType%>  container w-50"><%= msg %></div>
+        <% } else {%>
+                <%= null %> 
+                <% } %> 
+    
+<form class="was-validated shadow alert  " action="/todo.join" method="post">
+    <div>
+        <a class=" float-end" href="/login.page">Sing in</a>
+    </div>
+    <div  class="text-muted"><label for="">please check your email</label></div> <p></p>
+    <div><input autofocus name="userCode" type="text" required pattern="^[0-9]*$" placeholder="enter code" >
+    <div class="invalid-feedback"> code should be 5 or 6 digit</div>
+    </div>
+     
+    <p></p>
+    <div><input  style="background-color: slateblue;" class="text-light btn" type="submit" value="Active"></div>
+</form>
+
+</body>
+
+<script>
+function load(){
+$("form").slideDown(1000)
+}
+    
+
+</script>
+
+
+</html>

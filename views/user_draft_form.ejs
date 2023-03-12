@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Form</title>
+    <link rel="shortcut icon" href="media/root.ico" type="image/x-icon">  
+
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<style>
+         body *{
+        font: 1em sans-serif;
+    }
+
+    form {
+      width: 75%;
+      margin: auto;
+
+    }
+</style>
+<body class="text-capitalize container">
+  <% const hidden= "d-none" %> 
+
+  <legend class=" alert bg-dark text-center text-capitalize text-light" >Edit form: <%= typeof table_name==typeof alifn? null : table_name.replaceAll("_hm_", "").replaceAll("_deo_", "").replaceAll("_ueo_", "") %>  </legend>
+  <a class="  nav-link" href="/user.dashboard">Deshboard</a>
+    <form class="<%=hidden %> w-75" action="/user.draft.update" method="post">
+      <br>
+      <input class="d-none" type="text" name="fixedData[]" value="<%=table_name%>" id="">
+      <div></div>
+      <% if(column_name.length>3 && col_data.length>0 ) {%>
+       <input class="btn btn-info" type="submit" name="fixedData[]" value="draft">
+     <input class="btn btn-danger" type="submit" name="fixedData[]" value="submit">
+       <% } else {%>
+         <%= null %> 
+         <% } %>  
+      </div>
+
+<p></p>
+
+
+
+    <% if(column_name!=undefined && column_name.length>0 && col_data.length>0)    {%> 
+
+      <div  class="d-flex  flex-wrap">
+      
+        <% for(let i=0; i<column_name.length; i++){ %>
+          <div class="">
+            <div > <label class="<%=column_name[i].Field%>" for=""> <%= column_name[i].Field %> </label> </div>
+    
+          <% for(let x= 0; x<col_data.length; x++) {%>
+  
+            <div  >
+            <input id="<%=column_name[i].Field%>"  class="<%=column_name[i].Field%> form-control form-control-sm" type="text" name="<%=column_name[i].Field%>" value="<%=col_data[x][column_name[i].Field]%>" required >
+            </div>
+          </div>
+             <p></p>
+        <% } %>
+        
+        <div class=" border-bottom border-5 w-100"></div>
+  
+       
+     <% } %> 
+     
+    </div>
+
+      <% } else {%> 
+
+        <div class="alert alert-danger">N/A</div>
+    
+
+        <% } %> 
+
+  <p></p>
+ 
+  </form>
+
+
+<script>
+
+document.querySelector("form").removeAttribute("class")
+
+
+  for(let i= 0; i<100000; i++){
+    document.querySelectorAll("#ID")[i].style.display= "none"
+    document.querySelectorAll(".ID")[i].style.display= "none"
+
+    document.querySelectorAll("#UUID")[i].style.display= "none"
+    document.querySelectorAll(".UUID")[i].style.display= "none"
+
+    document.querySelectorAll("#EIIN")[i].style.display= "none"
+    document.querySelectorAll(".EIIN")[i].style.display= "none"
+
+    document.querySelectorAll("#address")[i].style.display= "none"
+    document.querySelectorAll(".address")[i].style.display= "none"
+
+    document.querySelectorAll("#Date")[i].style.display= "none"
+    document.querySelectorAll(".Date")[i].style.display= "none"
+
+    document.querySelectorAll("#Status")[i].style.display= "none"
+    document.querySelectorAll(".Status")[i].style.display= "none"
+
+    document.querySelectorAll(".DATAID")[i].style.display= "none"
+    document.querySelectorAll("#DATAID")[i].style.display= "none"
+    
+    document.querySelectorAll("#Status")[i].disabled= true;
+    document.querySelectorAll("#Date")[i].disabled= true;
+    document.querySelectorAll("#DATAID")[i].disabled= true;
+    document.querySelectorAll("#EIIN")[i].removeAttribute("required");
+    document.querySelectorAll("#address")[i].removeAttribute("required")
+
+  }
+
+
+
+</script>
+</body>
+</html>

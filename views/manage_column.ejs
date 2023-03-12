@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Column</title>
+    <link rel="shortcut icon" href="media/root.ico" type="image/x-icon">  
+
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script></head>
+
+</head>
+<body class=" container">
+    <legend style="background-color: #7f00ff;     font-family:'Times New Roman', Times, serif;
+    "  class="text-center alert  text-light">Manage Column </legend>
+    <a class=" nav-link" href="/admin.dashboard">Dashboard</a>
+    <a class=" nav-link" href="/manage.table">Manage Table</a>
+
+    <div style="display: none;" id="alert" class=" alert alert-danger shadow text-center fw-bold w-100 m-auto border-1"></div>
+
+     <br>
+    <% if(tableName.length>0 && column_name.length>7) {%>
+      
+
+    <table class=" table table-borderless">
+       <thead class=" table-info">
+                <th>Column Name</th>
+                <th>Action</th>
+       </thead>
+
+             <% for(let i=7; i<column_name.length; i++){%>
+          <tr>
+
+               <td class=" page-link"> <%=column_name[i].Field %> </td>
+               <td > <a id="<%=column_name[i].Field%>" class="btn btn-info" href="/update.column.form?table_name=<%= tableName %>&column_name=<%= column_name[i].Field%>"><i class="fa fa-edit"></i></a> 
+                   <button data-id="<%=tableName%>&<%=column_name[i].Field%>" class="<%=column_name[i].Field%> action_del btn btn-danger"><i class=" fa fa-trash"></i></button> </td>
+                  <% } %>   
+       </tr>
+
+   
+    </table>
+
+    
+      <% } else {%>
+         <div class=" alert alert-info container w-50">No Column Found...</div>
+
+         <% } %>   
+      
+    <script>
+
+ $(document).on("click", ".action_del", function(){
+    if(confirm("are you want to delete!")==true){
+
+        let arr= $(this).attr("data-id").split("&")
+        let table_name= arr[0]
+        let column_name= arr[1]
+       $.ajax({
+        type: "POST",
+        url: "/del.column",
+        dataType: "JSON",
+        data: {table_name, column_name},
+        success: function(msg){
+           
+         $("#alert").fadeIn("slow", ()=>{
+                $("#alert").text(`${msg.msg}`)
+            })
+
+        }
+    })
+    
+    setTimeout(()=>{
+            window.location.reload()
+           }, 2000)
+
+   
+    }
+ })
+    </script>
+</body>
+</html>

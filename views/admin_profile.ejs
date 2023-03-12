@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Info</title>
+    <link rel="shortcut icon" href="media/root.ico" type="image/x-icon">  
+
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script></head>
+
+    <style>
+          
+          body *{
+    
+    font-family:'Times New Roman', Times, serif;
+   }
+          
+        input{
+      width: 100%;
+      height: 35px;
+      border-radius: 5px;
+      border: none;
+      border-bottom: 1px solid slateblue;
+      outline: none;
+
+      
+  }
+
+  #iconPassword{
+    width: 20px;
+  }
+    
+  
+  form{
+          width: 90%;
+           margin: auto;
+         
+      }
+
+      @media only screen and (min-width: 768px) {
+          form {
+              width: 30%;
+          }
+      }
+
+      </style>
+</head>
+<body class="  container">
+ <legend style="background-color: #7f00ff;"  class=" alert text-light text-center">Account Info</legend>
+
+
+ <% if(user_info!= undefined && user_info.length>0){%> 
+
+    <% if(typeof msg!=  typeof alifn && msg.length !=0) {%>
+        <div class=" alert <%=alertType%> container w-50"><%= msg %></div>
+        <% } else {%>
+            <%= null %> 
+            <% } %> 
+    
+            <center>
+                <div id="wait" class="alert shadow w-25 rounded-pill">
+                 <div class=" spinner-grow bg-danger"></div>
+                 <div class=" spinner-grow bg-warning"></div>
+                 <div class=" spinner-grow bg-primary"></div>
+                </div>
+               </center>
+            
+   <div id="mainDiv" style="display: none;">
+    <form id="form1" class="alert shadow was-validated" action="/basic.user.profile" method="post">
+        <div class="">
+          <a  class="btn d-inline-block page-link w-50" href="/user.dashboard">Dashboard</a>
+      
+          <button type="button" id="btn1" class="w-50 btn float-end d-inline-block page-link">Security</button>
+        </div>
+      <hr>
+      
+              <div style="background-color: slateblue;color: white" class="fw-bold text-center alert "> Basic Information </div>
+      
+              
+              <div> <label for="">Name</label>
+                  <input  type="text" pattern="^[a-zA-Z0-9_\s]*$" name="name" value="<%=user_info[0].name%>" required>
+              </div>
+              
+              <p></p>
+              <div> <label for="">Telephone</label>
+                  <input  pattern="^[0-9]*$" type="telephone" name="telephone" value="<%=user_info[0].telephone%>" required>
+              </div>
+              <p></p>
+      
+      
+             <% if(user_info[0].user_role=="hm") {%>
+              
+              <div> <label for="">EIIN</label>
+                  <input  pattern="^[0-9]*$" type="number" name="EIIN" value="<%=user_info[0].EIIN%>" required>
+              </div>
+      
+              <% } else {%>
+                  <div> <label for="">Address</label>
+                      <input  pattern="^[a-zA-Z0-9_\s]*$" type="text" name="address" value="<%=user_info[0].address%>" required>
+                  </div>
+                  <% } %>   
+      
+              <p></p>
+        
+              <p></p>
+              <div>
+                  <input type="hidden" name="user_role" value="<%=user_info[0].user_role%>">
+                  <input type="hidden" name="ID" value="<%=user_info[0].ID%>">
+              </div>
+              <div>
+                  <input style="background-color: slateblue;color: white" class=" btn" type="submit" value="Update">
+              </div>
+          </form>
+
+<!-- form next -->
+
+
+          <form id="form2" style="display: none;" class="alert shadow was-validated" action="/verify.user.profile" method="post">
+            <div class="">
+              <a  class="btn d-inline-block page-link w-50" href="/user.dashboard">Dashboard</a>
+          
+              <button type="button" id="btn2" class="w-50 btn float-end d-inline-block page-link">Basic</button>
+            </div>
+          
+          <hr>
+                  <div style="background-color: slateblue;color: white" class="fw-bold text-center alert ">Security Information </div>
+          
+                  
+                  <div> <label for="">Username</label>
+                      <input  pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" type="email" name="username" value="<%=user_info[0].username%>" required>
+                  </div>
+
+                  <p></p>
+                  <div> <label for="">Password</label>
+                      <div>
+                          <input id="password" type="password" value="<%=user_info[0].password %> " name="password" placeholder="password" pattern="^[a-zA-Z0-9!@#$%&*]*$" minlength="6" maxlength="20"  required> 
+          
+                          <div> 
+                          
+                             <input type="checkbox" name="iconPassword" id="iconPassword">
+                          </div>
+                        <div>
+                          <label class="text-muted" for="iconPassword">Show Password</label>
+                        </div>
+          
+                          <div class="invalid-feedback">
+                              Required: <br>
+                              Minimun: 6 Letter <br>
+                              Maximun: 20 Letter
+                       
+                          </div>
+                          </div>
+                  <p></p>
+                  <div>
+                      <input type="hidden" name="user_role" value="<%=user_info[0].user_role%>">
+                      <input type="hidden" name="ID" value="<%=user_info[0].ID%>">
+                  </div>
+                  <div>
+                      <input style="background-color: slateblue;color: white" class=" btn" type="submit" value="Update">
+                  </div>
+              </form>
+    
+
+
+
+   </div>
+    
+
+    <% } else {%>
+        
+        <div class=" alert alert-danger">N/A</div>
+        
+        <% } %> 
+
+
+
+ <script>
+
+
+
+
+setTimeout(()=>{
+
+$("#wait").fadeOut("slow", ()=>{
+
+    $("#mainDiv").fadeIn("slow")
+})
+
+
+}, 2000)
+
+
+
+
+$("#iconPassword").click(()=>{
+
+            
+if($("#password").attr("type")=="password"){
+
+$("#password").attr("type", "text")
+
+
+}
+
+else if($("#password").attr("type")=="text"){
+
+$("#password").attr("type", "password")
+
+
+}
+
+})
+
+
+$("#btn1").on("click", ()=>{
+    $("#form1").fadeOut("slow", ()=>{
+        $("#form2").fadeIn("slow")
+    })
+})
+
+$("#btn2").on("click", ()=>{
+    $("#form2").fadeOut("slow", ()=>{
+        $("#form1").fadeIn("slow")
+    })
+})
+
+
+        </script>
+
+</body>
+</html>

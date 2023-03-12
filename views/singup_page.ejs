@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join now</title>
+    <link rel="shortcut icon" href="media/root.ico" type="image/x-icon">  
+
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+               body *{
+        font: 1em sans-serif;
+    }
+      
+      input{
+        width: 100%;
+        height: 35px;
+        border-radius: 5px;
+        border: 1px solid slateblue;
+        outline-color: slateblue;
+
+        
+    }
+
+      
+    
+    form{
+            width: 100%;
+            /* background-color: ; */
+            position: relative;
+             margin: auto;
+            top: 30x;
+            display: none;
+        }
+
+        @media only screen and (min-width: 768px) {
+            form {
+                width: 50%;
+            }
+        }
+
+        #iconPassword {
+        width: 20px;
+       
+        
+    }
+
+
+    </style>
+
+</head>
+
+<body onload="load()" class=" container">
+    <legend style="background-color: slateblue" class="shadow alert text-center text-light fw-bold"> Join Now <a class=" float-end nav-link text-light" href="/"><i class="fa fa-home"></i></a>
+    </legend>
+
+    <% if(typeof msg!=  typeof alifn && msg.length !=0) {%>
+        <div class=" alert <%=alertType%>  container w-50"><%= msg %></div>
+        <% } else {%>
+            <%= null %> 
+            <% } %> 
+
+<div class="  box">
+    
+    <form class="shadow alert was-validated" action="/todo.singup" onsubmit=" return match_password()" method="post" >
+
+        <div>
+            <select class=" form-control text-muted" name="user_role" id="">
+              
+                <option value="hm" selected aria-readonly="true" role="application" >Head Master</option>
+            </select>
+        </div>
+
+        <p></p>
+        <div>
+            <input type="text"  name="name" title="allow only letter" value="demo" pattern="^[a-zA-Z\s]*$" placeholder="name" minlength="2" maxlength="30" autofocus required>
+   
+        </div>
+        
+        <p></p>
+        <div>
+            <input  type="email" name="username" placeholder="username@mail.com" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" required>
+          
+        </div>
+        <p></p>
+
+        <div>
+
+            <div class=" input-group">
+                <span style="width: 20%;" class="m-0 btn btn-info text-end rounded">+880</span>
+                <input  type="tel" name="telephone" style="width: 80%;" pattern="^1[0-9]*$" value="1234567890" placeholder="xxxxxxxxx" minlength="10" maxlength="10" title="should be start 1 digit"  required>
+
+            </div>
+        
+        </div>
+        <p></p>
+        <div>
+            <input id="password" type="password" name="password" placeholder="password" pattern="^[a-zA-Z0-9!@#$%&*]*$" minlength="6" maxlength="20"  required> 
+
+            <div>
+                
+                <input type="checkbox" name="iconPassword" id="iconPassword">
+            </div>
+
+            <div>
+                <label class="text-muted" for="iconPassword">Show Password</label>
+              </div>
+
+            <div class="invalid-feedback">
+                Required: <br>
+                Minimun: 6 Letter <br>
+                Maximun: 20 Letter <br>
+
+            </div>
+            <div class=" valid-feedback ">Checked Password</div>
+          
+        </div>
+
+        <p></p>
+   
+<p></p>
+
+ <div id="">
+
+  <button style="background-color: slateblue;" class="text-light btn w-100">Join now</button>
+
+</div>
+<p></p>
+<div>
+    <span>already joined </span>
+    <a href="/login.page">Sing in</a> 
+
+</div>
+
+    </form>
+
+</div>
+</body>
+<script>
+    function load(){
+        $("form").fadeIn("slow")
+         }
+
+         $("#iconPassword").click(()=>{
+
+            
+if($("#password").attr("type")=="password"){
+
+$("#password").attr("type", "text")
+
+
+}
+
+else if($("#password").attr("type")=="text"){
+
+$("#password").attr("type", "password")
+
+
+}
+
+})
+</script>
+</html>

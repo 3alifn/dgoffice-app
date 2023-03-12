@@ -1,0 +1,99 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Code</title>
+    
+    <link rel="stylesheet" href="bootstrap.css">
+
+</head>
+
+<style>
+          
+    body *{
+  font: 1em sans-serif;
+}
+    
+  input{
+width: 100%;
+height: 35px;
+border-radius: 5px;
+border: none;
+border-bottom: 1px solid slateblue;
+outline: none;
+
+
+}
+
+
+form{
+    width: 90%;
+     margin: auto;
+   
+}
+
+@media only screen and (min-width: 768px) {
+    form {
+        width: 30%;
+    }
+}
+
+</style>
+<body>
+    
+          
+
+    <legend style="background-color: slateblue;" class="shadow alert text-center text-light">Verification Code</legend>
+
+    <% if(typeof msg!=  typeof alifn && msg.length !=0) {%>
+        <div class=" alert <%=alertType%> container w-50"><%= msg %></div>
+        <% } else {%>
+            <%= null %> 
+            <% } %> 
+
+
+
+    <form class="was-validated alert shadow " action="/security.user.profile" method="post">
+
+            <div><input name="userCode" type="text" required pattern="^[0-9]*$" placeholder="enter code" >
+            <div class="invalid-feedback">code should be 5 or 6 digit</div>
+            </div>
+<p></p>
+      
+         <div>
+
+            <button style="background-color: slateblue;" class="w-100 text-light btn">Verify</button>
+         </div>
+       
+        
+
+
+    </form>
+
+
+    <script>
+        $("#iconPassword").click(()=>{
+
+            
+if($("#password").attr("type")=="password"){
+
+$("#password").attr("type", "text")
+
+
+}
+
+else if($("#password").attr("type")=="text"){
+
+$("#password").attr("type", "password")
+
+
+}
+
+})
+
+    </script>
+
+</body>
+</html>
+

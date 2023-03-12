@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Form</title>
+    <link rel="shortcut icon" href="media/root.ico" type="image/x-icon">  
+
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<style>
+         body *{
+        font: 1em sans-serif;
+    }
+
+    form{
+      margin: auto;
+      position: relative;
+      background-color:aliceblue;
+      width: 75%;
+    }
+</style>
+<body class="text-capitalize container">
+    <legend style="background-color: #7f00ff;"  class=" alert text-center  text-light" > Update Form</legend>
+    <a class=" nav-link" href="/admin.dashboard">Dashboard</a>
+    <hr>
+
+    <center>
+      <div id="wait"  class="alert shadow w-25 rounded-pill">
+       <div class=" spinner-grow bg-danger"></div>
+       <div class=" spinner-grow bg-warning"></div>
+       <div class=" spinner-grow bg-primary"></div>
+      </div>
+     </center>
+
+  <% const hidden= "d-none" %> 
+
+
+  <div id="mainDiv" style="display: none;">
+
+    <% if(column_name != undefined && column_name.length > 0 && col_data.length>0){%>
+    
+    
+      <form class="<%=hidden %> shadow m-auto" action="/update.data" method="post">
+        <input class="d-none" type="text" name="table_name" value="<%= table_name %> " id="">
+        <% for(let i=0; i<column_name.length; i++){ %>
+          <div>
+            <label id="<%=column_name[i].Field%>"> <%= column_name[i].Field %>  </label>
+          </div>
+  
+  
+    <% for(let x= 0; x<col_data.length; x++) {%>
+  
+          <div>
+          <input id="<%=column_name[i].Field%>"  class="<%=column_name[i].Field%>  form-control form-control-sm" type="text" name="<%=column_name[i].Field%>" value="<%=col_data[x][column_name[i].Field]%>">
+          </div>
+   <br>
+           
+      <% } %>  
+  
+  <% } %>  
+      <div>
+        <input class="btn btn-secondary" type="submit" value="Save">
+      </div>
+  </form>
+  
+  
+  
+      <% }  else {%>
+        <div class="alert alert-danger">N/A</div>
+        
+        <% } %> 
+  
+  </div>
+
+<script>
+
+setTimeout(()=>{
+
+$("#wait").fadeOut("slow", ()=>{
+
+    $("#mainDiv").fadeIn("slow")
+})
+
+
+}, 1000)
+
+
+
+document.querySelector("form").removeAttribute("class")
+
+  
+
+
+  for(let i= 0; i<100000; i++){
+    document.querySelectorAll(".ID")[i].style.display= "none";
+    document.querySelectorAll("#ID")[i].style.display= "none";
+    document.querySelectorAll(".UUID")[i].style.display= "none";
+  
+    document.querySelectorAll("#UUID")[i].style.display= "none";
+  
+    document.querySelectorAll(".Date")[i].style.display= "none";
+    document.querySelectorAll("#Date")[i].style.display= "none";
+     document.querySelectorAll(".DATAID")[i].style.display= "none";
+    document.querySelectorAll("#DATAID")[i].style.display= "none";
+
+    // document.querySelectorAll("#Date")[i].disabled=true
+    document.querySelectorAll("#Status")[i].disabled=true
+    document.querySelectorAll("#ID")[i].disabled=true
+    document.querySelectorAll("#UUID")[i].disabled=true
+    document.querySelectorAll("#DATAID")[i].disabled=true
+
+  }
+
+
+
+
+</script>
+</body>
+</html>

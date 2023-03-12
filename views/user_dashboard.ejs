@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deshboard</title>
+    <link rel="shortcut icon" href="media/root.ico" type="image/x-icon">  
+
+
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" /> 
+  
+
+
+</head>
+
+</head>
+<style>
+    body *{
+        font: 1em sans-serif;
+    }
+
+    @media  only screen and (max-width: 600px) {
+      #select1, #select2 {
+        width: 75% !important;
+      }
+    }
+
+    a {
+       text-decoration: none;
+    } 
+    a:hover{
+       text-decoration:underline;
+    }
+
+</style>
+<body class=" container">
+
+    <legend style="background-color: #7f00ff;" class=" alert  text-light d-none d-md-block" > 
+
+        <marquee  class="w-50 bg-dark text-light">Welcome:: <%= user_info[0].name%></marquee>       
+        
+        <a class=" btn page-link ms-1 float-end" href="/user.profile"> <i class=" fa fa-user"> Account</i>  </a> 
+        <a class="btn btn-danger float-end" href="/logout"><i class="fa fa-sign-out" aria-hidden="true">Logout</i></a>
+
+    </legend>
+
+    <legend  style="background-color: #7f00ff;" class=" d-md-none alert text-muted">
+        <marquee  class="w-50 bg-dark text-light">Welcome:: <%= user_info[0].name%></marquee>
+
+        <button id="menuIcon" class="float-end btn btn-light page-link" style="outline: none;"><i class=" fa fa-align-right"></i></button>
+      
+        <div id="menuItem" class=" btn w-50 p-2 float-end bg-light position-absolute shadow " style="z-index: 1; top:60px; right:0px; display: none;">
+       <a class="rounded page-item" href="/user.profile">Account</a>
+       <p></p>
+       <a class="rounded page-item" href="/logout">Logout</a>
+        </div>
+    
+        </legend>
+ 
+
+<p></p>
+
+<% if(table_name.length>0) {%>
+ 
+    <% if (user_info[0].EIIN!=null || user_info[0].address!=null) {%> 
+<div class="">
+    <form action="/open.user.form" method="post">
+        <div id="select1" class="w-50 btn-group">
+
+    <input type="hidden" name="user_role" value="<%=user_info[0].user_role %>"  id="">
+    <input type="hidden" name="ID" value="<%=user_info[0].ID %>"  id="">
+
+    <select id="selectOpen" class="text-center w-100  " placeholder="Select Table" name="table_name">
+
+
+                <% for(let i=0; i<table_name.length; i++) {%>
+
+                <option  value="<%=table_name[i].TABLE_NAME%>"><%=table_name[i].TABLE_NAME.replaceAll("_hm_", "").replaceAll("_deo_", "").replaceAll("_ueo_", "")%></option>
+
+                   
+            
+                    <% } %>  
+             
+    </select>
+   <input  class="btn page-link" style="background-color: slateblue; color:white" type="submit" value="Open">
+</div>
+
+</form>
+<!-- next///// -->
+<p></p>
+<form action="/user.dashboard" method="get">
+    <div id="select2" class="w-50 btn-group">
+
+<select id="selectFetch" placeholder="Select Table"  class="text-center  w-100" name="after_table" >
+
+    <% for(let i= 0; i<table_name.length; i++) {%>
+        <option  value="<%=btoa(table_name[i].TABLE_NAME)%>" > <%= table_name[i].TABLE_NAME.replaceAll("_hm_", "").replaceAll("_deo_", "").replaceAll("_ueo_", "")%></option>
+        <% } %>  
+    
+        <% if(typeof filter_table== typeof alifn){ %>
+            <%= null%> 
+            <% } else {%>  
+                <option value="<%=btoa(filter_table)%>" selected> <%= filter_table.replaceAll("_hm_", "").replaceAll("_deo_", "").replaceAll("_ueo_", "")%></option>
+                <% } %> 
+
+
+</select>
+<input class=" btn  bg-info" type="submit" value="Fetch">
+</div>
+<p></p>
+<% if(typeof filter_table==typeof alifn) {%> 
+    <center><a  class=" fw-bold nav-link"><%=table_name[0].TABLE_NAME.replaceAll("_deo_", "").replaceAll("_ueo_", "").replaceAll("_hm_", "")%> </a></center>
+
+    <% } else {%>
+        <center><a  class="fw-bold nav-link"><%=filter_table.replaceAll("_deo_", "").replaceAll("_ueo_", "").replaceAll("_hm_", "")%> </a></center>
+
+        <% } %>  
+</form>
+</div>
+    
+<div id="mainDiv" >
+    
+
+    <table class=" table table-bordered">
+        
+        <thead class=" table" style="background-color: seagreen; color: white">
+         <th >Date</th>
+         <th > Status </th>
+        </thead>
+       <tbody style="display: none;">
+         
+        <% if(typeof col_data==typeof alifn30) {%>
+            <%= null%> 
+            <% }
+            
+            else {%> 
+                <% for(let i=0; i<col_data.length; i++){ %>
+                    <tr>
+                        <td> <%= col_data[i].Date.toString().substring(0, 25)%> </td>
+        
+                        <% if(col_data[i].Status=="draft") { %>
+                           <%  var btn_color= "btn btn-info" %> 
+        
+                            <% } else {%>
+                                <%  var btn_color= "btn btn-primary" %> 
+                                <% } %>   
+                        
+                                <% if(typeof filter_table==typeof alifn) {%>
+                                    <td> <a id="<%= col_data[i].Status%>"  href="/user.draft.form?table_name=<%=table_name[0].TABLE_NAME%>&ID=<%= col_data[i].DATAID%> " class=" <%= btn_color %> "> <%= col_data[i].Status %>  </a> </td>
+        
+                                    <% } else {%>
+                                             <% if (col_data[i].Status=="draft") {%>
+        
+                                                <td> <a  href="/user.draft.form?table_name=<%=filter_table%>&ID=<%= col_data[i].DATAID%> " class=" <%= btn_color %> "> <%= col_data[i].Status %>  </a> </td>
+                                                <% }  else {%>
+        
+                                                    <td> <button class="btn btn-danger disabled">submited</button> </td>
+        
+                                                    <% } %>  
+        
+        
+                                        <% } %>   
+                        
+                    </tr>
+                    <% } %> 
+               
+                <% } %>  
+       </tbody>
+             
+         </table>
+     
+             <% } else {%> 
+     
+                 
+                 <div class=" alert alert-info container w-50">Please Setup Address or EIIN</div>
+     
+     
+                 <% } %> 
+     
+         <% } else {%>
+             <div class=" alert alert-info container w-50">You Haven't Any Data</div>
+             <% } %>  
+         
+</div>
+
+         <center>
+              <div id="wait" class="alert shadow w-25 rounded-pill">
+                 <div class=" spinner-grow bg-danger"></div>
+                 <div class=" spinner-grow bg-warning"></div>
+                 <div class=" spinner-grow bg-primary"></div>
+                </div>
+         </center>
+
+        
+  <script>
+    
+$("#menuIcon").on("click", ()=>{
+    $("#menuItem").toggle("slow")
+})
+
+
+
+$(document).ready(function () {
+      $('select').selectize({
+          sortField: 'text'
+      });
+  });
+
+
+  
+setTimeout(()=>{
+
+$("#wait").fadeOut("slow", ()=>{
+
+    $("tbody").fadeIn("slow")
+})
+
+
+}, 1000)
+
+
+
+  </script>
+</body>
+</html>

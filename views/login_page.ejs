@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sing in</title>
+    <link rel="shortcut icon" href="media/root.ico" type="image/x-icon">  
+
+    <link rel="shortcut icon" href="media/root.ico" type="image/x-icon">  
+
+    <link rel="stylesheet" href="/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <style>
+                 body *{
+        font: 1em sans-serif;
+    }
+        
+          
+        input{
+        width: 100%;
+        height: 35px;
+        border-radius: 5px;
+        border: 1px solid slateblue;
+        outline-color: slateblue;
+
+        
+    }
+
+    #iconPassword {
+        width: 20px;
+       
+        
+    }
+
+      
+    
+    form{
+            width: 100%;
+            /* background-color: ; */
+            position: relative;
+             margin: auto;
+            top: 30px;
+            display: none;
+        }
+
+        @media only screen and (min-width: 768px) {
+            form {
+                width: 50%;
+            }
+        }
+
+        </style>
+    </head>
+    <body onload="load()" class=" container">
+
+        <legend style="background-color: slateblue;" class="shadow alert text-center text-light fw-bolder">Sing in <a class=" float-end nav-link text-light" href="/"><i class="fa fa-home"></i></a></legend>
+
+        <% if(typeof msg!=  typeof alifn && msg.length !=0) {%>
+            <div class=" alert <%=alertType%>  container w-50"><%= msg %></div>
+            <% } else {%>
+                <%= null %> 
+                <% } %> 
+
+                <center>
+                    <div id="wait" style="display: none;" class=" shadow w-25 rounded-pill">
+                       <div class=" spinner-grow bg-danger"></div>
+                       <div class=" spinner-grow bg-warning"></div>
+                       <div class=" spinner-grow bg-primary"></div>
+                      </div>
+               </center>
+    
+
+        <form class="shadow alert" action="/todo.login" method="post">
+ 
+            <div>
+                <input type="email" name="username" placeholder="username" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" required>
+            </div>
+<p></p>
+            <div>
+                <input id="password" type="password" name="password" placeholder="password"  required>
+            </div>
+
+            <div>
+                
+                <input type="checkbox" name="iconPassword" id="iconPassword">
+            </div>
+          <div>
+            <label class="text-muted" for="iconPassword">Show Password</label>
+          </div>
+          
+<p></p>
+             <div>
+
+                <button id="singin" style="background-color: slateblue;" class="w-100 text-light btn">Sing in</button>
+
+             </div>
+<p></p>
+             <div>
+
+                <span >open account <a class="link-primary" href="/singup.page">Join now</a></span>
+                 <a class=" float-end" href="/forget.page">Forget Password</a>
+               
+
+             </div>
+        </form>
+
+    </body>
+    
+    <script>
+        function load(){
+        $("form").fadeIn("slow")
+         }
+
+
+
+         $("#iconPassword").click(()=>{
+
+            
+            if($("#password").attr("type")=="password"){
+
+            $("#password").attr("type", "text")
+
+
+            }
+
+            else if($("#password").attr("type")=="text"){
+
+            $("#password").attr("type", "password")
+
+
+            }
+
+         })
+
+
+           
+$("#singin").on("click", ()=>{
+    
+$("#wait").fadeIn("slow")
+
+
+})
+
+
+
+
+</script>
+             
+     
+</html>

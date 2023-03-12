@@ -1,0 +1,57 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+#mainDiv{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 50%;
+    /* overflow: hidden; */
+}
+
+
+
+#tableDiv button {
+   position: relative;
+   float: right;
+}
+#column_count_row{
+    width: 50%;
+}
+
+#column_count_row div input, #column_count_row div select {
+    width: 100% ;
+}
+
+#submit_btn{
+    width: 50%;
+
+}
+
+
+@media only screen and (max-width: 600px){
+    #mainDiv{
+    width: 90%;
+
+    }
+    #tableDiv {
+        width: 90% !important;
+    }
+    #column_count_row {
+        width: 90% !important;
+    }
+    #submit_btn {
+        width: 90%;
+
+    }
+}
+
+
+
+
+#submit_btn input, #go_btn{
+ position: relative;
+ float: right;
+}
+
