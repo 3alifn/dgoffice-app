@@ -1,0 +1,10 @@
+PORT= 3000
+
+DB_HOST= localhost
+DB_PORT= 30
+DB_USER= root
+DB_PASSWORD= 
+DB_DATABASE= code_dbms
+
+MAIL_USER= yourEmailHere: example@mail.com
+MAIL_PASSWORD= yourEmailPasswordHere: example123
