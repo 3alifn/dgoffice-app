@@ -23,22 +23,4 @@
 [Facebook](https://www.facebook.com/alifnayon30)
 
 
-
-1. First item
-2. Second item
-3. Third item
-
-- First item
-- Second item
-- Third item
-
-
-
-| USER | SECTION |
-| ----------- | ----------- |
-| ADMIN | Title |
-| TEACHER | Text |
-| PARENT | Text |
-| STUDENT | Text |
-
 Thanks for see.
