@@ -41,4 +41,4 @@
 | PARENT | Text |
 | STUDENT | Text |
 
-Thanks for see==.
+Thanks for see [^1]
