@@ -15,7 +15,7 @@
 ---
 
 **code by alifn**
-![alifn](./public/image/team/alifn-01.png)
+![alifn](./public/alifn.png)
 
 [Website](https://www.alifn.seawebit.com)
 [Linkedin](https://www.linkedin.com/in/alifn-nayon-472821265/)
