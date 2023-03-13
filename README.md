@@ -10,7 +10,7 @@ These are the elements outlined in John Gruber’s original design document. All
 
 ### Heading
 
- H1
+<h1>Heading 1</h1>
 ## H2
 ### H3
 
