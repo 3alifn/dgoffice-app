@@ -1,6 +1,6 @@
 # MYSCHOOL
 
-**a school manegement software**
+**A School Manegement Software**
 
 ``` json
 {
