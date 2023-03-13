@@ -1,11 +1,11 @@
-# MYSCHOOL
+# DDOFFICE APP
 
-**A School Manegement Software**
+**A ddoffice Manegement Software**
 
 ``` json
 {
   "author": "alif_nayon",
-  "project": "myschool",
+  "project": "ddoffice_app",
   "version": "beta version"
 }
 ```
