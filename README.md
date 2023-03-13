@@ -15,7 +15,7 @@
 ---
 
 **code by alifn**
-![alifn](./public/alifn.png)
+![alifn](./public/media/alifn.png)
 
 [Website](https://www.alifn.seawebit.com)
 [Linkedin](https://www.linkedin.com/in/alifn-nayon-472821265/)
@@ -41,4 +41,4 @@
 | PARENT | Text |
 | STUDENT | Text |
 
-Thanks for see [^1]:
+Thanks for see.
