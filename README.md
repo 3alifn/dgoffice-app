@@ -1,6 +1,6 @@
-# DDOFFICE APP
+# dg_office
 
-**A ddoffice Manegement Software**
+**A dgoffice Manegement Software**
 
 ``` json
 {
